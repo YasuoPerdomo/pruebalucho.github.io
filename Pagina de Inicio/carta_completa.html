@@ -1,0 +1,693 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Terminal Pesquero - Carta Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600;700;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-error": "#ffffff",
+                "tertiary-fixed-dim": "#58d7ec",
+                "coastal-teal": "#2BB7CC",
+                "tertiary-container": "#004e58",
+                "tertiary": "#00363d",
+                "on-tertiary": "#ffffff",
+                "secondary-fixed-dim": "#ffb86f",
+                "primary": "#002e6b",
+                "surface-dim": "#dcdad6",
+                "on-secondary": "#ffffff",
+                "surface-container-low": "#f6f3ef",
+                "outline": "#747782",
+                "on-tertiary-fixed-variant": "#004e59",
+                "surface": "#fcf9f5",
+                "error": "#ba1a1a",
+                "primary-fixed-dim": "#aec6ff",
+                "primary-container": "#16448d",
+                "sunset-coral": "#EFA351",
+                "wave-blue": "#B1E3EE",
+                "inverse-surface": "#31302e",
+                "surface-bright": "#fcf9f5",
+                "surface-tint": "#355ca6",
+                "ocean-deep": "#16448D",
+                "surface-container-highest": "#e5e2de",
+                "surface-container-high": "#eae8e4",
+                "on-secondary-fixed": "#2c1600",
+                "on-primary-fixed-variant": "#16448d",
+                "on-secondary-fixed-variant": "#693c00",
+                "shell-pink": "#F2CED8",
+                "on-tertiary-fixed": "#001f24",
+                "on-surface-variant": "#434751",
+                "inverse-on-surface": "#f3f0ec",
+                "on-primary": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "inverse-primary": "#aec6ff",
+                "on-primary-container": "#93b4ff",
+                "on-primary-fixed": "#001a43",
+                "on-surface": "#1c1c1a",
+                "on-secondary-container": "#744300",
+                "secondary": "#8a5100",
+                "background": "#fcf9f5",
+                "secondary-container": "#ffb05d",
+                "sand-mist": "#F9F6F2",
+                "on-error-container": "#93000a",
+                "on-background": "#1c1c1a",
+                "on-tertiary-container": "#40c5da",
+                "surface-variant": "#e5e2de",
+                "error-container": "#ffdad6",
+                "primary-fixed": "#d8e2ff",
+                "whatsapp-green": "#25D366",
+                "tertiary-fixed": "#9fefff",
+                "surface-container": "#f0ede9",
+                "secondary-fixed": "#ffdcbd",
+                "outline-variant": "#c3c6d3"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "stack-md": "24px",
+                "stack-sm": "12px",
+                "base": "8px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "stack-lg": "48px",
+                "container-max": "1200px"
+        },
+        "fontFamily": {
+                "label-sm": [
+                        "Hanken Grotesk"
+                ],
+                "label-lg": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg-mobile": [
+                        "Vollkorn"
+                ],
+                "headline-lg": [
+                        "Vollkorn"
+                ],
+                "display-lg": [
+                        "Vollkorn"
+                ],
+                "title-lg": [
+                        "Hanken Grotesk"
+                ],
+                "headline-md": [
+                        "Vollkorn"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk"
+                ],
+                "body-md": [
+                        "Hanken Grotesk"
+                ]
+        },
+        "fontSize": {
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "1.0",
+                                "fontWeight": "500"
+                        }
+                ],
+                "label-lg": [
+                        "14px",
+                        {
+                                "lineHeight": "1.0",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "display-lg": [
+                        "56px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "900"
+                        }
+                ],
+                "title-lg": [
+                        "20px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: theme('colors.sand-mist');
+            color: theme('colors.on-surface');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        html { scroll-behavior: smooth; }
+        .sticky-nav {
+            scrollbar-width: none;
+        }
+        .sticky-nav::-webkit-scrollbar {
+            display: none;
+        }
+        .hero-pattern {
+            background-image: radial-gradient(theme('colors.wave-blue') 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.2;
+        }
+
+        .glass-card {
+            background: rgba(252, 249, 245, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(22, 68, 141, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: theme('colors.coastal-teal');
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased font-body-md overflow-x-hidden">
+
+<nav class="w-full top-0 sticky z-50 bg-surface shadow-sm transition-all duration-300" id="main-nav">
+<div class="max-w-container-max mx-auto flex justify-between items-center px-margin-mobile md:px-gutter py-4">
+<a class="font-display-lg text-[32px] md:text-[40px] leading-none text-ocean-deep tracking-tighter hover:opacity-90 transition-opacity flex flex-col" href="/index.html">
+<span class="">TERMINAL</span>
+<span class="text-coastal-teal text-[20px] md:text-[24px] mt-[-8px]">PESQUERO</span>
+</a>
+<div class="hidden md:flex space-x-8 items-center"><a class="text-on-surface-variant hover:text-ocean-deep transition-colors font-title-lg text-title-lg nav-link" href="#locales">Locales</a><a class="text-on-surface-variant hover:text-ocean-deep transition-colors font-title-lg text-title-lg nav-link" href="#delivery">Delivery</a></div>
+<button onclick="toggleCart()" aria-label="Carrito" class="flex items-center justify-center p-2 text-ocean-deep hover:bg-surface-variant rounded-full transition-colors relative mr-2">
+<span class="material-symbols-outlined text-2xl">shopping_cart</span>
+<span id="cart-count-badge" class="absolute top-0 right-0 bg-sunset-coral text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
+</button><a class="hidden md:flex bg-ocean-deep text-on-primary px-6 py-3 rounded hover:bg-opacity-90 transition-all font-label-lg text-label-lg uppercase tracking-wider items-center gap-2 scale-95 active:scale-90 shadow-md" href="#menu">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+                Reservar
+            </a>
+<button aria-label="Toggle Menu" class="md:hidden text-ocean-deep p-2">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</nav>
+<header class="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden bg-ocean-deep">
+<div class="absolute inset-0 z-0">
+<img alt="Ceviche peruano" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida/AP1WRLv1z9DtQYgS82W3P7vE5CFrIPAfMWMJhYpo-9FiwAXYIrbqGlBV3WBUJekYBzvYDIwH5tPY2-hlPCRebf3KyV7wa0GGTYVmuMwdJgrzIs9Mdt6tIng-WfHIsK53ScoO9TR-bSjjlopVRwrZNMKEA227E_b1lOqHMAvMSM3-z1SlO7TI3Px3QxoVMBPL9peTvU7O0CLvodKWl0kw2R-e3_kFLtS4WHeNI8X6lUweXVb3sAYN2KBvb_wgAsU">
+<div class="absolute inset-0 bg-gradient-to-r from-ocean-deep/90 to-ocean-deep/40 z-10 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-sand-mist via-transparent to-transparent z-10"></div>
+</div>
+<div class="relative z-20 text-center px-margin-mobile flex flex-col items-center pt-20">
+<span class="font-label-lg text-label-lg text-wave-blue uppercase tracking-widest mb-4 inline-block bg-ocean-deep/80 px-4 py-1 rounded-full backdrop-blur-sm">Carta Delivery</span>
+<h1 class="font-display-lg text-[40px] md:text-display-lg text-surface-bright leading-tight drop-shadow-md mb-6">Platos Exclusivos</h1>
+<p class="font-body-lg text-body-lg text-surface-container-high max-w-2xl mx-auto drop-shadow">Sólo para envíos a domicilios. Así que pide de una nomás.</p>
+</div>
+<div class="absolute bottom-0 w-full overflow-hidden leading-none z-20">
+<svg class="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[100px]" data-name="Layer 1" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+<path class="fill-sand-mist" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.95,123,194,108.57,243.68,97.35,285.83,72.41,321.39,56.44Z"></path>
+</svg>
+</div>
+</header>
+<div class="sticky top-20 z-40 bg-sand-mist/95 backdrop-blur-md border-b border-surface-variant shadow-sm py-3">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+<ul class="flex gap-4 overflow-x-auto sticky-nav whitespace-nowrap items-center snap-x">
+<li class="snap-start"><a class="font-title-lg text-title-lg px-4 py-2 rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors nav-link" href="#entradas">Entradas</a></li>
+<li class="snap-start"><a class="font-title-lg text-title-lg px-4 py-2 rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors nav-link" href="#ceviches">Ceviches</a></li>
+<li class="snap-start"><a class="font-title-lg text-title-lg px-4 py-2 rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors nav-link" href="#fondos">Fondos</a></li><li class="snap-start"><a class="font-title-lg text-title-lg px-4 py-2 rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors nav-link" href="#caldos">Caldos</a></li>
+<li class="snap-start"><a class="font-title-lg text-title-lg px-4 py-2 rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors nav-link" href="#menu-kids">Menú Kids</a></li>
+<li class="snap-start"><a class="font-title-lg text-title-lg px-4 py-2 rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors nav-link" href="#combos">Combos</a></li>
+<li class="snap-start"><a class="font-title-lg text-title-lg px-4 py-2 rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors nav-link" href="#duos">Dúos</a></li>
+<li class="snap-start"><a class="font-title-lg text-title-lg px-4 py-2 rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors nav-link" href="#postres">Postres</a></li>
+</ul>
+</div>
+</div>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-stack-lg space-y-stack-lg">
+<section class="scroll-mt-32" id="entradas">
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-ocean-deep mb-2">Entradas Potentes</h2>
+<p class="font-body-md text-body-md text-on-surface-variant italic">"Sin miedo al éxito"</p>
+<div class="w-24 h-1 bg-sunset-coral mt-6 rounded-full opacity-80"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full border border-ocean-deep/10 relative glass-card">
+<div class="h-48 overflow-hidden relative">
+<img alt="Causa Acevichada" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLuNmmRkwvfUbuYftbSTnmUJT8005yf_bgk3wCx_9odvzdpQl7WZhEFIEOioBVipuGyXDXVwQCYozQLAuR8LkcBh_2ZGnD4UKasl0wHvo-HLZsVFSovbkhOZlWeauH0oMjmJ997A1c-3CP74vDyhe4wLxqczkDJhO2B-Cke9KTEMZ2j5xXnK4uplIzcXjTmPvCfL6QSB7-JglQ4fc0Ex3easqHwtAe_fYFm5NrKeQ48oXWFN0OMSnnKaXeqd">
+<span class="absolute top-3 left-3 bg-shell-pink text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-full shadow-sm">Recomendado</span>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-2 gap-4">
+<h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Causa Acevichada</h3>
+<span class="font-title-lg text-title-lg text-sunset-coral whitespace-nowrap btn-item-price">S/ 39.90</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow">Cremosa masa de papa al ají amarillo, rellena de láminas de palta y mayonesa. Con su cevichazo en salsa de ají amarillo.</p>
+<button onclick="addToCart(this)" class="w-full py-2 border-2 border-ocean-deep text-ocean-deep font-label-lg text-label-lg rounded hover:bg-ocean-deep hover:text-on-primary transition-colors flex items-center justify-center gap-2 group-hover:bg-ocean-deep group-hover:text-on-primary">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                            Añadir
+                        </button>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-4 flex flex-col justify-between shadow-sm border border-ocean-deep/10 hover:border-coastal-teal transition-colors glass-card">
+<div>
+<div class="flex justify-between items-baseline mb-2 border-b border-dashed border-ocean-deep/20 pb-2">
+<h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Leche de Tigre Clásica 500ML</h3>
+<span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 24.90</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Con chicharrón de pota.</p>
+</div>
+<button onclick="addToCart(this)" class="text-coastal-teal font-label-lg text-label-lg flex items-center gap-1 hover:text-ocean-deep transition-colors self-start">
+<span class="material-symbols-outlined text-sm">add</span> Añadir
+                    </button>
+</div>
+<div class="bg-surface rounded-xl p-4 flex flex-col justify-between shadow-sm border border-ocean-deep/10 hover:border-coastal-teal transition-colors glass-card">
+<div>
+<div class="flex justify-between items-baseline mb-2 border-b border-dashed border-ocean-deep/20 pb-2">
+<h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Tequeños del Terminal</h3>
+<span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 28.90</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">6 unidades rellenos de langostinos con salsa de la casa y salsa agridulce.</p>
+</div>
+<button onclick="addToCart(this)" class="text-coastal-teal font-label-lg text-label-lg flex items-center gap-1 hover:text-ocean-deep transition-colors self-start">
+<span class="material-symbols-outlined text-sm">add</span> Añadir
+                    </button>
+</div>
+</div>
+</section>
+<section class="scroll-mt-32" id="ceviches">
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-ocean-deep mb-2">Nuestros Ceviches</h2>
+<div class="w-24 h-1 bg-sunset-coral mt-6 rounded-full opacity-80"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter">
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col sm:flex-row h-full border border-ocean-deep/10 glass-card">
+<div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden">
+<img alt="Ceviche Clásico" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvoGyLm2Pp3KAULkFBMOMdBSO4YJifjLMoynPgSiuML0EW3fUDsGRPkcJaCIP_Y-8Cj_CRBalMaJmBynttzrZ5oGFQEkPMgP9eAFasp2Eah71_OXKHLwOn4Py1jQUXfSBLIpkWSL8UMxqnrv7kQdgrbcX94Z_kRUnkwvXhpJlSr4_G8vsG7DMCu2_QgnYysyWzAkcXFJrOcaWlXNNxsx6uPcOpUax1lVw4DvOfsN5jpZZNgWXv1CDUJux2soK3EK5buGi_wnwllWha">
+<div class="absolute top-4 left-4">
+<span class="bg-wave-blue text-ocean-deep px-3 py-1 rounded-full font-label-sm text-label-sm shadow-sm">Recomendado</span>
+</div>
+</div>
+<div class="p-6 flex flex-col justify-between w-full sm:w-3/5">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Ceviche Clásico</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">
+                                Pesca del día cortada en cubos, marinada en jugo de limón recién exprimido, ají limo, culantro y cebolla roja. Acompañado de camote glaseado y choclo tierno.
+                            </p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-ocean-deep/10">
+<span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 45.00</span>
+<button onclick="addToCart(this)" class="bg-ocean-deep text-white px-6 py-2 rounded font-label-lg text-label-lg hover:bg-coastal-teal transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Añadir
+                            </button>
+</div>
+</div>
+</article>
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col sm:flex-row h-full border border-ocean-deep/10 glass-card">
+<div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden">
+<img alt="Ceviche Mixto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeIS6CcGb_1gMi5rxre_INgL1nSly3Y5VGlGHuMAscOQdpccpzshFT1NCBrqRG7V4J_cRGHW2rqIs05EwQUJ42QVGVHidmMKSXr9aVodbZ1Hrf09qTQ5DPg3F0PrNHv8RmeIyIDrtIDE4ptiM2iSwCUbPBhUnAUjvo7eF42lXVAvFmZ1jTMa_hGq01S-amKmzHAQpJpAN4ZbIpoZf1hpAIPJxyFqId92o0U5rGepXfr85rtWAhaZn1bEtNwbydSaQBtWQR9rV_51lg">
+</div>
+<div class="p-6 flex flex-col justify-between w-full sm:w-3/5">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Ceviche Mixto</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">
+                                Una explosión de mariscos: calamar, pulpo, langostinos y pesca del día en nuestra leche de tigre especial de rocoto suave. El favorito de la casa.
+                            </p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-ocean-deep/10">
+<span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 49.90</span>
+<button onclick="addToCart(this)" class="bg-ocean-deep text-white px-6 py-2 rounded font-label-lg text-label-lg hover:bg-coastal-teal transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Añadir
+                            </button>
+</div>
+</div>
+</article>
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col sm:flex-row h-full border border-ocean-deep/10 glass-card">
+<div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden">
+<img alt="Ceviche de Conchas Negras" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvXhfgpbkXbuD9eNarnz9ssa5xleKpHN7bZnOPIwdhIeZ_LEMGerlFyWmuA67db6m4vufLRGj4tRmVafr3o1OPIpg1DRAXcxDpYxLohwdbEEoghoVtFwTESUuy1OoD5kJiTOx1SGJY-xfg5kELmIefQWFnLXgyUhqkT74rpjWku4sF_zRn68dMrITgclWoy3WIIYA87TAP0o-nJP_bpXlI-mNic2zb3MVz5-JYvYN1tOMy7WTXQ78UIep3O-0dARdcOkNyNjCC7pSF">
+<div class="absolute top-4 left-4">
+<span class="bg-shell-pink text-ocean-deep px-3 py-1 rounded-full font-label-sm text-label-sm shadow-sm">Especial</span>
+</div>
+</div>
+<div class="p-6 flex flex-col justify-between w-full sm:w-3/5">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Ceviche de Conchas Negras</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">
+                                Clásico del norte. Fresquísimas conchas negras marinadas en limón, cebolla roja, ají limo y un toque de zarandaja. Un levanta muertos garantizado.
+                            </p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-ocean-deep/10">
+<span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 42.90</span>
+<button onclick="addToCart(this)" class="bg-ocean-deep text-white px-6 py-2 rounded font-label-lg text-label-lg hover:bg-coastal-teal transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Añadir
+                            </button>
+</div>
+</div>
+</article>
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col sm:flex-row h-full border border-ocean-deep/10 glass-card">
+<div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden">
+<img alt="Ceviche Carretillero" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDldQfh-kq6rGj8XO7xctBCHF9iSeQxY6yYbXywhEDy3KwiHBWSd0RkyqnTJ7wAsuhDCKGdmefn1yVeGR8E-y-mc5wjWV3nXTjoxJd85UOb8BUU0Tt47XQR4RWIJu5b6NJ7BHe6IPnEyG8qOBvR9kaTqwU6940HsUF3xmeUn4gH3jbU83iImCtqzoQTfJ2aSC2gRar1kZENZ7rRnQ7H1yygkiVDXIY6THZ1918BgukS_4-qJaqpcf8l33Ii45_eWb9LQegQLkYNPq61">
+</div>
+<div class="p-6 flex flex-col justify-between w-full sm:w-3/5">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Ceviche Carretillero</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">
+                                Nuestro ceviche clásico servido con una generosa porción de chicharrón de pota crujiente. La combinación perfecta de texturas.
+                            </p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-ocean-deep/10">
+<span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 49.90</span>
+<button onclick="addToCart(this)" class="bg-ocean-deep text-white px-6 py-2 rounded font-label-lg text-label-lg hover:bg-coastal-teal transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Añadir
+                            </button>
+</div>
+</div>
+</article>
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col sm:flex-row h-full border border-ocean-deep/10 glass-card"><div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden"><img alt="Ceviche de Pota" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvoGyLm2Pp3KAULkFBMOMdBSO4YJifjLMoynPgSiuML0EW3fUDsGRPkcJaCIP_Y-8Cj_CRBalMaJmBynttzrZ5oGFQEkPMgP9eAFasp2Eah71_OXKHLwOn4Py1jQUXfSBLIpkWSL8UMxqnrv7kQdgrbcX94Z_kRUnkwvXhpJlSr4_G8vsG7DMCu2_QgnYysyWzAkcXFJrOcaWlXNNxsx6uPcOpUax1lVw4DvOfsN5jpZZNgWXv1CDUJux2soK3EK5buGi_wnwllWha"></div><div class="p-6 flex flex-col justify-between w-full sm:w-3/5"><div><div class="flex justify-between items-start mb-2"><h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Ceviche de Pota</h3></div><p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">Nuestra deliciosa pota fresca marinada en limón y ají limo, acompañada de camote y choclo.</p></div><div class="flex items-center justify-between mt-auto pt-4 border-t border-ocean-deep/10"><span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 32.90</span><button onclick="addToCart(this)" class="bg-ocean-deep text-white px-6 py-2 rounded font-label-lg text-label-lg hover:bg-coastal-teal transition-colors flex items-center gap-2"><span class="material-symbols-outlined text-sm">add</span> Añadir</button></div></div></article><article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col sm:flex-row h-full border border-ocean-deep/10 glass-card"><div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden"><img alt="Ceviche Porito Norte" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeIS6CcGb_1gMi5rxre_INgL1nSly3Y5VGlGHuMAscOQdpccpzshFT1NCBrqRG7V4J_cRGHW2rqIs05EwQUJ42QVGVHidmMKSXr9aVodbZ1Hrf09qTQ5DPg3F0PrNHv8RmeIyIDrtIDE4ptiM2iSwCUbPBhUnAUjvo7eF42lXVAvFmZ1jTMa_hGq01S-amKmzHAQpJpAN4ZbIpoZf1hpAIPJxyFqId92o0U5rGepXfr85rtWAhaZn1bEtNwbydSaQBtWQR9rV_51lg"></div><div class="p-6 flex flex-col justify-between w-full sm:w-3/5"><div><div class="flex justify-between items-start mb-2"><h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Ceviche Porito Norte</h3></div><p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">Sabor auténtico del norte con el toque especial de la casa y los ingredientes más frescos.</p></div><div class="flex items-center justify-between mt-auto pt-4 border-t border-ocean-deep/10"><span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 47.90</span><button onclick="addToCart(this)" class="bg-ocean-deep text-white px-6 py-2 rounded font-label-lg text-label-lg hover:bg-coastal-teal transition-colors flex items-center gap-2"><span class="material-symbols-outlined text-sm">add</span> Añadir</button></div></div></article><article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col sm:flex-row h-full border border-ocean-deep/10 glass-card"><div class="w-full sm:w-2/5 h-64 sm:h-auto relative overflow-hidden"><img alt="Ceviche de Pescado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDldQfh-kq6rGj8XO7xctBCHF9iSeQxY6yYbXywhEDy3KwiHBWSd0RkyqnTJ7wAsuhDCKGdmefn1yVeGR8E-y-mc5wjWV3nXTjoxJd85UOb8BUU0Tt47XQR4RWIJu5b6NJ7BHe6IPnEyG8qOBvR9kaTqwU6940HsUF3xmeUn4gH3jbU83iImCtqzoQTfJ2aSC2gRar1kZENZ7rRnQ7H1yygkiVDXIY6THZ1918BgukS_4-qJaqpcf8l33Ii45_eWb9LQegQLkYNPq61"></div><div class="p-6 flex flex-col justify-between w-full sm:w-3/5"><div><div class="flex justify-between items-start mb-2"><h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Ceviche de Pescado</h3></div><p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">La pesca del día en su máxima expresión, marinada a la perfección.</p></div><div class="flex items-center justify-between mt-auto pt-4 border-t border-ocean-deep/10"><span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 47.90</span><button onclick="addToCart(this)" class="bg-ocean-deep text-white px-6 py-2 rounded font-label-lg text-label-lg hover:bg-coastal-teal transition-colors flex items-center gap-2"><span class="material-symbols-outlined text-sm">add</span> Añadir</button></div></div></article> </div> </section>
+<section class="scroll-mt-32" id="fondos">
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-ocean-deep mb-2">Fondos Bien Taipá</h2>
+<div class="w-24 h-1 bg-sunset-coral mt-6 rounded-full opacity-80"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter">
+<article class="bg-surface rounded-xl shadow-sm overflow-hidden flex flex-col group border border-ocean-deep/10 hover:border-coastal-teal transition-colors duration-300 glass-card">
+<div class="relative w-full h-64 overflow-hidden">
+<img alt="Arroz con Mariscos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx3-ZIQB0DjbthW0sDMQwG6ToSnZEIc9no-YgSJpxxJzxtnZSpy9416yMFJ4Pqt76gucDSMIIMA3u4XHu4sVzXEma3QvmXapEjm_uUnurhfc4A6odu_wi2IHKcl00Mey6-5jAFak9Q8AlGmJHESJbOnbYAybeHp6sQO2uj3HeXZ-oh_097Pr9wHY_QJJo8kDNRMBCFVUg0-A-EFJzjalgeGxVpD_I8GD83ZKfoG1AT6KY4RxSHfp_wVsIovXhqG0RrD26F3cpj9JuV">
+<div class="absolute top-4 left-4">
+<span class="bg-shell-pink text-on-surface px-3 py-1 rounded-full font-label-sm text-label-sm shadow-sm">Recomendado</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2 gap-4">
+<h3 class="text-headline-md font-headline-md text-ocean-deep line-clamp-2 btn-item-name">Arroz con Mariscos</h3>
+<span class="text-title-lg font-title-lg text-sunset-coral whitespace-nowrap btn-item-price">S/ 49.90</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6 flex-grow">Arroz al wok con mixtura de mariscos seleccionados, ají panca, vino blanco y un toque de queso parmesano. Acompañado de sarsa criolla.</p>
+<button onclick="addToCart(this)" class="w-full bg-ocean-deep text-white font-label-lg text-label-lg py-3 rounded hover:bg-coastal-teal transition-colors duration-200 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Añadir
+</button>
+</div>
+</article>
+</div>
+</section>
+</main>
+
+<div id="sidebar-cart" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-surface z-[100] shadow-2xl border-l border-ocean-deep/10 flex flex-col translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-4 border-b border-surface-variant bg-ocean-deep text-white flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <h2 class="font-headline-md text-headline-md">Tu Pedido</h2>
+        </div>
+        <button onclick="toggleCart()" class="p-1 hover:bg-white/10 rounded-full transition-colors">
+            <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+    </div>
+
+    <div id="cart-items-container" class="p-4 flex-grow overflow-y-auto space-y-4">
+        <div id="cart-empty-msg" class="text-center py-12 text-on-surface-variant opacity-60 font-body-md">
+            <span class="material-symbols-outlined text-4xl block mb-2">set_meal</span>
+            Tu carrito está vacío.<br>¡Añade un cevichazo!
+        </div>
+    </div>
+
+    <div class="p-4 border-t border-surface-variant bg-surface-container-low space-y-4">
+        <div>
+            <label class="block text-label-sm font-label-sm text-ocean-deep uppercase tracking-wider mb-1">Nombre de quien recibe:</label>
+            <input type="text" id="customer-name" placeholder="Ej. Juan Perdomo" class="w-full px-3 py-2 border border-outline-variant rounded text-body-md focus:outline-none focus:border-ocean-deep bg-surface">
+        </div>
+        <div>
+            <label class="block text-label-sm font-label-sm text-ocean-deep uppercase tracking-wider mb-1">Dirección de Entrega:</label>
+            <input type="text" id="customer-address" placeholder="Ej. Av. Larco 123, Miraflores" class="w-full px-3 py-2 border border-outline-variant rounded text-body-md focus:outline-none focus:border-ocean-deep bg-surface">
+        </div>
+
+        <div class="pt-2 border-t border-dashed border-ocean-deep/20">
+            <div class="flex justify-between items-center mb-4">
+                <span class="font-title-lg text-title-lg text-ocean-deep">Total de la Orden:</span>
+                <span id="cart-total-price" class="font-display-lg text-[28px] text-sunset-coral font-bold">S/ 0.00</span>
+            </div>
+            <button onclick="sendWhatsAppOrder()" class="w-full bg-whatsapp-green text-white font-label-lg text-label-lg py-3 rounded hover:bg-opacity-90 transition-all uppercase tracking-wider flex items-center justify-center gap-2 shadow-md">
+                <span class="material-symbols-outlined font-bold">chat</span>
+                Enviar Pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/40 z-[90] hidden opacity-0 transition-opacity duration-300"></div>
+
+<button onclick="toggleCart()" class="fixed bottom-6 right-6 z-50 bg-sunset-coral text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all group">
+    <span class="material-symbols-outlined text-3xl">shopping_basket</span>
+    <span id="floating-cart-counter" class="absolute -top-1 -right-1 bg-ocean-deep text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-white">0</span>
+</button>
+
+<footer class="w-full bg-ocean-deep text-white mt-auto py-12">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+<div class="border-t border-surface/10 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-md text-label-sm text-surface-variant opacity-60">
+                    © 2024 Terminal Pesquero. Sabor de altamar.
+                </p>
+<div class="flex gap-4">
+<a class="font-body-md text-label-sm text-surface-variant opacity-60 hover:opacity-100 transition-opacity" href="#">Términos</a>
+<a class="font-body-md text-label-sm text-surface-variant opacity-60 hover:opacity-100 transition-opacity" href="#">Privacidad</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+    let cart = [];
+
+    // Alternar visibilidad de Carrito Lateral
+    function toggleCart() {
+        const sidebar = document.getElementById('sidebar-cart');
+        const overlay = document.getElementById('cart-overlay');
+        
+        if (sidebar.classList.contains('translate-x-full')) {
+            sidebar.classList.remove('translate-x-full');
+            overlay.classList.remove('hidden');
+            setTimeout(() => overlay.classList.add('opacity-100'), 10);
+        } else {
+            sidebar.classList.add('translate-x-full');
+            overlay.classList.remove('opacity-100');
+            setTimeout(() => overlay.classList.add('hidden'), 300);
+        }
+    }
+
+    // Agregar Item al Carrito detectando datos de la interfaz de forma dinámica
+    function addToCart(buttonElement) {
+        // Encontrar el contenedor de la tarjeta más cercana
+        const card = buttonElement.closest('.bg-surface') || buttonElement.closest('article');
+        if (!card) return;
+
+        // Capturar Nombre y Precio mediante clases de referencia añadidas
+        const nameEl = card.querySelector('.btn-item-name');
+        const priceEl = card.querySelector('.btn-item-price');
+
+        if (!nameEl || !priceEl) return;
+
+        const name = nameEl.textContent.trim();
+        // Limpiar el texto para obtener solo el valor flotante numérico
+        const price = parseFloat(priceEl.textContent.replace('S/', '').replace(/,/g, '').trim());
+
+        // Validar si ya existe en el array del carrito
+        const existingItem = cart.find(item => item.name === name);
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ name, price, quantity: 1 });
+        }
+
+        updateCartUI();
+        
+        // Efecto visual de feedback rápido en los contadores flotantes
+        const badge = document.getElementById('cart-count-badge');
+        badge.classList.add('scale-125');
+        setTimeout(() => badge.classList.remove('scale-125'), 200);
+    }
+
+    // Cambiar cantidades desde los botones internos del carrito (+/-)
+    function changeQuantity(name, delta) {
+        const item = cart.find(i => i.name === name);
+        if (!item) return;
+
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+            cart = cart.filter(i => i.name !== name);
+        }
+        updateCartUI();
+    }
+
+    // Eliminar producto por completo del carrito
+    function removeProduct(name) {
+        cart = cart.filter(i => i.name !== name);
+        updateCartUI();
+    }
+
+    // Renderizar la Interfaz Gráfica del Carrito Lateral Completa
+    function updateCartUI() {
+        const container = document.getElementById('cart-items-container');
+        const emptyMsg = document.getElementById('cart-empty-msg');
+        
+        // Calcular Cantidad total e Importe Acumulado
+        let totalItems = 0;
+        let totalPrice = 0;
+
+        // Limpiar elementos variables anteriores manteniendo el mensaje vacío por defecto
+        container.querySelectorAll('.cart-render-item').forEach(el => el.remove());
+
+        if (cart.length === 0) {
+            emptyMsg.classList.remove('hidden');
+        } else {
+            emptyMsg.classList.add('hidden');
+            
+            cart.forEach(item => {
+                totalItems += item.quantity;
+                totalPrice += (item.price * item.quantity);
+
+                // Crear plantilla HTML limpia del producto dentro del panel
+                const itemRow = document.createElement('div');
+                itemRow.className = 'cart-render-item flex justify-between items-center bg-sand-mist p-3 rounded border border-ocean-deep/5 shadow-sm transition-all';
+                itemRow.innerHTML = `
+                    <div class="flex-grow pr-2">
+                        <h4 class="font-title-lg text-body-md text-ocean-deep font-semibold leading-tight">${item.name}</h4>
+                        <span class="text-label-sm text-sunset-coral font-bold block mt-0.5">S/ ${(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center bg-surface border border-outline-variant rounded">
+                            <button onclick="changeQuantity('${item.name}', -1)" class="px-2 py-1 text-ocean-deep hover:bg-surface-variant font-bold text-sm transition-colors">-</button>
+                            <span class="px-2 text-body-md font-semibold text-on-surface">${item.quantity}</span>
+                            <button onclick="changeQuantity('${item.name}', 1)" class="px-2 py-1 text-ocean-deep hover:bg-surface-variant font-bold text-sm transition-colors">+</button>
+                        </div>
+                        <button onclick="removeProduct('${item.name}')" class="text-error p-1 hover:bg-error/10 rounded flex items-center justify-center transition-colors" title="Eliminar">
+                            <span class="material-symbols-outlined text-lg">delete</span>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(itemRow);
+            });
+        }
+
+        // Actualizar contadores globales y textos informativos
+        document.getElementById('cart-count-badge').textContent = totalItems;
+        document.getElementById('floating-cart-counter').textContent = totalItems;
+        document.getElementById('cart-total-price').textContent = `S/ ${totalPrice.toFixed(2)}`;
+    }
+
+    // Construir la cadena estructurada y enviar directamente a la API de WhatsApp Business
+    function sendWhatsAppOrder() {
+        if (cart.length === 0) {
+            alert('El carrito está vacío. Agrega tus platos antes de enviar.');
+            return;
+        }
+
+        const nameInput = document.getElementById('customer-name').value.trim();
+        const addressInput = document.getElementById('customer-address').value.trim();
+
+        if (!nameInput || !addressInput) {
+            alert('Por favor ingresa tu Nombre y Dirección de Entrega para procesar el delivery.');
+            return;
+        }
+
+        // Encabezado formateado estético
+        let message = `*⚓ NUEVO PEDIDO - TERMINAL PESQUERO ⚓*\n\n`;
+        message += `👤 *Cliente:* ${nameInput}\n`;
+        message += `📍 *Dirección:* ${addressInput}\n`;
+        message += `------------------------------------------\n`;
+        
+        let subtotalCalculated = 0;
+        cart.forEach(item => {
+            const itemCost = item.price * item.quantity;
+            subtotalCalculated += itemCost;
+            message += `▪️ ${item.quantity}x _${item.name}_ (S/ ${itemCost.toFixed(2)})\n`;
+        });
+
+        message += `------------------------------------------\n`;
+        message += `💰 *TOTAL A PAGAR: S/ ${subtotalCalculated.toFixed(2)}*\n\n`;
+        message += `¡Hola! Acabo de armar mi pedido desde la web de la carta completa. Quedo atento a la confirmación de la orden y tiempos de envío. 🌊`;
+
+        // Generación de URL final codificando caracteres especiales
+        const whatsappNumber = '51902862400';
+        const targetUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+        
+        // Abrir orden de compra de forma segura
+        window.open(targetUrl, '_blank');
+    }
+
+    // Sincronizar Shadow en Scroll del Nav Original
+    document.addEventListener('DOMContentLoaded', () => {
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    });
+</script>
+</body></html>
