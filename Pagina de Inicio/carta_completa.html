@@ -233,11 +233,11 @@
 
 <nav class="w-full top-0 sticky z-50 bg-surface shadow-sm transition-all duration-300" id="main-nav">
 <div class="max-w-container-max mx-auto flex justify-between items-center px-margin-mobile md:px-gutter py-4">
-<a class="font-display-lg text-[32px] md:text-[40px] leading-none text-ocean-deep tracking-tighter hover:opacity-90 transition-opacity flex flex-col" href="/index.html">
+<a class="font-display-lg text-[32px] md:text-[40px] leading-none text-ocean-deep tracking-tighter hover:opacity-90 transition-opacity flex flex-col" href="../index.html">
 <span class="">TERMINAL</span>
 <span class="text-coastal-teal text-[20px] md:text-[24px] mt-[-8px]">PESQUERO</span>
 </a>
-<div class="hidden md:flex space-x-8 items-center"><a class="text-on-surface-variant hover:text-ocean-deep transition-colors font-title-lg text-title-lg nav-link" href="#locales">Locales</a><a class="text-on-surface-variant hover:text-ocean-deep transition-colors font-title-lg text-title-lg nav-link" href="#delivery">Delivery</a></div>
+<div class="hidden md:flex space-x-8 items-center"><a class="text-on-surface-variant hover:text-ocean-deep transition-colors font-title-lg text-title-lg nav-link" href="#locales">Locales</a><a class="text-on-surface-variant hover:text-ocean-deep transition-colors font-title-lg text-title-lg nav-link" href="https://api.whatsapp.com/send?phone=51902862400&amp;text=Hola,%20quisiera%20hacer%20una%20reservacion%20y%20porfa">Delivery</a></div>
 <button onclick="toggleCart()" aria-label="Carrito" class="flex items-center justify-center p-2 text-ocean-deep hover:bg-surface-variant rounded-full transition-colors relative mr-2">
 <span class="material-symbols-outlined text-2xl">shopping_cart</span>
 <span id="cart-count-badge" class="absolute top-0 right-0 bg-sunset-coral text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
@@ -251,21 +251,26 @@
 </div>
 </nav>
 <header class="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden bg-ocean-deep">
-<div class="absolute inset-0 z-0">
-<img alt="Ceviche peruano" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida/AP1WRLv1z9DtQYgS82W3P7vE5CFrIPAfMWMJhYpo-9FiwAXYIrbqGlBV3WBUJekYBzvYDIwH5tPY2-hlPCRebf3KyV7wa0GGTYVmuMwdJgrzIs9Mdt6tIng-WfHIsK53ScoO9TR-bSjjlopVRwrZNMKEA227E_b1lOqHMAvMSM3-z1SlO7TI3Px3QxoVMBPL9peTvU7O0CLvodKWl0kw2R-e3_kFLtS4WHeNI8X6lUweXVb3sAYN2KBvb_wgAsU">
-<div class="absolute inset-0 bg-gradient-to-r from-ocean-deep/90 to-ocean-deep/40 z-10 mix-blend-multiply"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-sand-mist via-transparent to-transparent z-10"></div>
-</div>
-<div class="relative z-20 text-center px-margin-mobile flex flex-col items-center pt-20">
-<span class="font-label-lg text-label-lg text-wave-blue uppercase tracking-widest mb-4 inline-block bg-ocean-deep/80 px-4 py-1 rounded-full backdrop-blur-sm">Carta Delivery</span>
-<h1 class="font-display-lg text-[40px] md:text-display-lg text-surface-bright leading-tight drop-shadow-md mb-6">Platos Exclusivos</h1>
-<p class="font-body-lg text-body-lg text-surface-container-high max-w-2xl mx-auto drop-shadow">Sólo para envíos a domicilios. Así que pide de una nomás.</p>
-</div>
-<div class="absolute bottom-0 w-full overflow-hidden leading-none z-20">
-<svg class="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[100px]" data-name="Layer 1" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
-<path class="fill-sand-mist" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.95,123,194,108.57,243.68,97.35,285.83,72.41,321.39,56.44Z"></path>
-</svg>
-</div>
+    <div class="absolute inset-0 z-0 overflow-hidden" id="hero-carousel">
+        <img alt="Ceviche peruano" class="carousel-img absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 opacity-100" src="https://lh3.googleusercontent.com/aida/AP1WRLv1z9DtQYgS82W3P7vE5CFrIPAfMWMJhYpo-9FiwAXYIrbqGlBV3WBUJekYBzvYDIwH5tPY2-hlPCRebf3KyV7wa0GGTYVmuMwdJgrzIs9Mdt6tIng-WfHIsK53ScoO9TR-bSjjlopVRwrZNMKEA227E_b1lOqHMAvMSM3-z1SlO7TI3Px3QxoVMBPL9peTvU7O0CLvodKWl0kw2R-e3_kFLtS4WHeNI8X6lUweXVb3sAYN2KBvb_wgAsU">
+        <img alt="Nuestros Ceviches" class="carousel-img absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 opacity-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvoGyLm2Pp3KAULkFBMOMdBSO4YJifjLMoynPgSiuML0EW3fUDsGRPkcJaCIP_Y-8Cj_CRBalMaJmBynttzrZ5oGFQEkPMgP9eAFasp2Eah71_OXKHLwOn4Py1jQUXfSBLIpkWSL8UMxqnrv7kQdgrbcX94Z_kRUnkwvXhpJlSr4_G8vsG7DMCu2_QgnYysyWzAkcXFJrOcaWlXNNxsx6uPcOpUax1lVw4DvOfsN5jpZZNgWXv1CDUJux2soK3EK5buGi_wnwllWha">
+        <img alt="Arroz con Mariscos" class="carousel-img absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 opacity-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx3-ZIQB0DjbthW0sDMQwG6ToSnZEIc9no-YgSJpxxJzxtnZSpy9416yMFJ4Pqt76gucDSMIIMA3u4XHu4sVzXEma3QvmXapEjm_uUnurhfc4A6odu_wi2IHKcl00Mey6-5jAFak9Q8AlGmJHESJbOnbYAybeHp6sQO2uj3HeXZ-oh_097Pr9wHY_QJJo8kDNRMBCFVUg0-A-EFJzjalgeGxVpD_I8GD83ZKfoG1AT6KY4RxSHfp_wVsIovXhqG0RrD26F3cpj9JuV">
+
+        <div class="absolute inset-0 bg-gradient-to-r from-ocean-deep/90 to-ocean-deep/40 z-10 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sand-mist via-transparent to-transparent z-10"></div>
+    </div>
+
+    <div class="relative z-20 text-center px-margin-mobile flex flex-col items-center pt-20">
+        <span class="font-label-lg text-label-lg text-wave-blue uppercase tracking-widest mb-4 inline-block bg-ocean-deep/80 px-4 py-1 rounded-full backdrop-blur-sm">Carta Delivery</span>
+        <h1 class="font-display-lg text-[40px] md:text-display-lg text-surface-bright leading-tight drop-shadow-md mb-6">Platos Exclusivos</h1>
+        <p class="font-body-lg text-body-lg text-surface-container-high max-w-2xl mx-auto drop-shadow">Sólo para envíos a domicilios. Así que pide de una nomás.</p>
+    </div>
+
+    <div class="absolute bottom-0 w-full overflow-hidden leading-none z-20">
+        <svg class="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[100px]" data-name="Layer 1" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+            <path class="fill-sand-mist" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.95,123,194,108.57,243.68,97.35,285.83,72.41,321.39,56.44Z"></path>
+        </svg>
+    </div>
 </header>
 <div class="sticky top-20 z-40 bg-sand-mist/95 backdrop-blur-md border-b border-surface-variant shadow-sm py-3">
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
@@ -305,30 +310,45 @@
                         </button>
 </div>
 </div>
-<div class="bg-surface rounded-xl p-4 flex flex-col justify-between shadow-sm border border-ocean-deep/10 hover:border-coastal-teal transition-colors glass-card">
-<div>
-<div class="flex justify-between items-baseline mb-2 border-b border-dashed border-ocean-deep/20 pb-2">
-<h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Leche de Tigre Clásica 500ML</h3>
-<span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 24.90</span>
+<div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full border border-ocean-deep/10 relative glass-card">
+    <div class="h-48 overflow-hidden relative">
+        <img alt="Leche de Tigre Clasica" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://i.ytimg.com/vi/Rh4rVDXB8PY/maxresdefault.jpg">
+    </div>
+    
+    <div class="p-4 flex-grow flex flex-col justify-between">
+        <div class="flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-4">
+                <h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Leche de Tigre Clásica 500ML</h3>
+                <span class="font-title-lg text-title-lg text-sunset-coral whitespace-nowrap btn-item-price">S/ 24.90</span>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow">Con chicharrón de pota.</p>
+        </div>
+        
+        <button onclick="addToCart(this)" class="w-full mt-auto py-2 border-2 border-ocean-deep text-ocean-deep font-label-lg text-label-lg rounded hover:bg-ocean-deep hover:text-on-primary transition-colors flex items-center justify-center gap-2 group-hover:bg-ocean-deep group-hover:text-on-primary">
+            <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+            Añadir
+        </button>
+    </div>
 </div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">Con chicharrón de pota.</p>
-</div>
-<button onclick="addToCart(this)" class="text-coastal-teal font-label-lg text-label-lg flex items-center gap-1 hover:text-ocean-deep transition-colors self-start">
-<span class="material-symbols-outlined text-sm">add</span> Añadir
-                    </button>
-</div>
-<div class="bg-surface rounded-xl p-4 flex flex-col justify-between shadow-sm border border-ocean-deep/10 hover:border-coastal-teal transition-colors glass-card">
-<div>
-<div class="flex justify-between items-baseline mb-2 border-b border-dashed border-ocean-deep/20 pb-2">
-<h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Tequeños del Terminal</h3>
-<span class="font-title-lg text-title-lg text-sunset-coral btn-item-price">S/ 28.90</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">6 unidades rellenos de langostinos con salsa de la casa y salsa agridulce.</p>
-</div>
-<button onclick="addToCart(this)" class="text-coastal-teal font-label-lg text-label-lg flex items-center gap-1 hover:text-ocean-deep transition-colors self-start">
-<span class="material-symbols-outlined text-sm">add</span> Añadir
-                    </button>
-</div>
+<div class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full border border-ocean-deep/10 relative glass-card">
+    <div class="h-48 overflow-hidden relative">
+        <img alt="Tequeños del Terminal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://i.ytimg.com/vi/Z6UUKfsyYJY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBV_Mcsc4d2tdYGw6Yc1POgHlzulw">
+    </div>
+    
+    <div class="p-4 flex-grow flex flex-col justify-between">
+        <div class="flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-4">
+                <h3 class="font-headline-md text-headline-md text-ocean-deep btn-item-name">Tequeños del Terminal</h3>
+                <span class="font-title-lg text-title-lg text-sunset-coral whitespace-nowrap btn-item-price">S/ 28.90</span>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow">Con chicharrón de pota.</p>
+        </div>
+        
+        <button onclick="addToCart(this)" class="w-full mt-auto py-2 border-2 border-ocean-deep text-ocean-deep font-label-lg text-label-lg rounded hover:bg-ocean-deep hover:text-on-primary transition-colors flex items-center justify-center gap-2 group-hover:bg-ocean-deep group-hover:text-on-primary">
+            <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+            Añadir
+        </button>
+    </div>
 </div>
 </section>
 <section class="scroll-mt-32" id="ceviches">
@@ -524,7 +544,7 @@
 
     <article class="bg-surface rounded-xl shadow-sm overflow-hidden flex flex-col group border border-ocean-deep/10 hover:border-coastal-teal transition-colors duration-300 glass-card">
       <div class="relative w-full h-64 overflow-hidden">
-        <img alt="Chicharrón de Pota" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-pota-placeholder">
+        <img alt="Chicharrón de Pota" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://i.ytimg.com/vi/dsWLpLpsL8M/sddefault.jpg">
       </div>
       <div class="p-6 flex flex-col flex-grow">
         <div class="flex justify-between items-start mb-2 gap-4">
@@ -540,7 +560,7 @@
 
     <article class="bg-surface rounded-xl shadow-sm overflow-hidden flex flex-col group border border-ocean-deep/10 hover:border-coastal-teal transition-colors duration-300 glass-card">
       <div class="relative w-full h-64 overflow-hidden">
-        <img alt="Filete de Pescado a la Plancha" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-fish-plancha-placeholder">
+        <img alt="Filete de Pescado a la Plancha" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://recetacubana.com/wp-content/uploads/2019/09/filete-de-pescado-a-la-plancha.jpg">
       </div>
       <div class="p-6 flex flex-col flex-grow">
         <div class="flex justify-between items-start mb-2 gap-4">
@@ -556,7 +576,7 @@
 
     <article class="bg-surface rounded-xl shadow-sm overflow-hidden flex flex-col group border border-ocean-deep/10 hover:border-coastal-teal transition-colors duration-300 glass-card">
       <div class="relative w-full h-64 overflow-hidden">
-        <img alt="Tallarín Verde" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-tallarin-verde-placeholder">
+        <img alt="Tallarín Verde" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://i.ytimg.com/vi/enxbUqDbq2g/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCmlWvs33fxtTJCN94EQsFnzlwCJw">
       </div>
       <div class="p-6 flex flex-col flex-grow">
         <div class="flex justify-between items-start mb-2 gap-4">
@@ -572,7 +592,7 @@
 
     <article class="bg-surface rounded-xl shadow-sm overflow-hidden flex flex-col group border border-ocean-deep/10 hover:border-coastal-teal transition-colors duration-300 glass-card">
       <div class="relative w-full h-64 overflow-hidden">
-        <img alt="Arroz Chaufa de Mariscos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-chaufa-mariscos-placeholder">
+        <img alt="Arroz Chaufa de Mariscos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://comedera.com/wp-content/uploads/sites/9/2022/02/arroz-chaufa-de-mariscos.jpg">
       </div>
       <div class="p-6 flex flex-col flex-grow">
         <div class="flex justify-between items-start mb-2 gap-4">
@@ -588,7 +608,7 @@
 
     <article class="bg-surface rounded-xl shadow-sm overflow-hidden flex flex-col group border border-ocean-deep/10 hover:border-coastal-teal transition-colors duration-300 glass-card">
       <div class="relative w-full h-64 overflow-hidden">
-        <img alt="Arroz Chaufa de Pescado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-chaufa-pescado-placeholder">
+        <img alt="Arroz Chaufa de Pescado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://buenazo.cronosmedia.glr.pe/original/2021/09/16/6143e231d4bfcf3c4448e32e.jpg">
       </div>
       <div class="p-6 flex flex-col flex-grow">
         <div class="flex justify-between items-start mb-2 gap-4">
@@ -1194,6 +1214,27 @@
                 nav.classList.remove('shadow-md');
             }
         });
+    });
+    
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('#hero-carousel .carousel-img');
+        let currentIndex = 0;
+
+        function changeSlide() {
+            // Oculta la imagen actual cambiando su opacidad a 0
+            images[currentIndex].classList.replace('opacity-100', 'opacity-0');
+            
+            // Calcula el índice de la siguiente imagen
+            currentIndex = (currentIndex + 1) % images.length;
+            
+            // Muestra la nueva imagen cambiando su opacidad a 100
+            images[currentIndex].classList.replace('opacity-0', 'opacity-100');
+        }
+
+        // Configura el carrusel para cambiar automáticamente cada 4 segundos (4000ms)
+        setInterval(changeSlide, 2000);
     });
 </script>
 </body></html>
