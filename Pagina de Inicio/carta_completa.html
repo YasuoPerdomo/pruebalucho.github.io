@@ -1024,6 +1024,23 @@
             <label class="block text-label-sm font-label-sm text-ocean-deep uppercase tracking-wider mb-1">Nombre de quien recibe:</label>
             <input type="text" id="customer-name" placeholder="Ej. Juan Perdomo" class="w-full px-3 py-2 border border-outline-variant rounded text-body-md focus:outline-none focus:border-ocean-deep bg-surface">
         </div>
+        
+        <div>
+            <label class="block text-label-sm font-label-sm text-ocean-deep uppercase tracking-wider mb-1">Sede o Local más cercano:</label>
+            <select id="delivery-zone" class="w-full px-3 py-2 border border-outline-variant rounded text-body-md focus:outline-none focus:border-ocean-deep bg-surface text-on-surface">
+                <option value="">-- Selecciona una Sede para tu envío --</option>
+                <option value="surco">Terminal Pesquero - Surco</option>
+                <option value="miraflores">Terminal Pesquero - Miraflores</option>
+                <option value="san_miguel">Terminal Pesquero - San Miguel</option>
+                <option value="los_olivos">Terminal Pesquero - Los Olivos</option>
+                <option value="chorrillos">Terminal Pesquero - Chorrillos</option>
+                <option value="san_borja">Terminal Pesquero - San Borja</option>
+                <option value="la_molina">Terminal Pesquero - La Molina</option>
+                <option value="magdalena">Terminal Pesquero - Magdalena</option>
+                <option value="comas">Terminal Pesquero - Comas</option>
+            </select>
+        </div>
+
         <div>
             <label class="block text-label-sm font-label-sm text-ocean-deep uppercase tracking-wider mb-1">Dirección de Entrega:</label>
             <input type="text" id="customer-address" placeholder="Ej. Av. Larco 123, Miraflores" class="w-full px-3 py-2 border border-outline-variant rounded text-body-md focus:outline-none focus:border-ocean-deep bg-surface">
@@ -1169,41 +1186,66 @@
         document.getElementById('cart-total-price').textContent = `S/ ${totalPrice.toFixed(2)}`;
     }
 
-    function sendWhatsAppOrder() {
-        if (cart.length === 0) {
-            alert('El carrito está vacío. Agrega tus platos antes de enviar.');
-            return;
-        }
+function sendWhatsAppOrder() {
+    const nameInput = document.getElementById('customer-name').value.trim();
+    const addressInput = document.getElementById('customer-address').value.trim(); // Ajustado al id del HTML
+    const zoneSelect = document.getElementById('delivery-zone').value; // Captura la sede elegida
 
-        const nameInput = document.getElementById('customer-name').value.trim();
-        const addressInput = document.getElementById('customer-address').value.trim();
-
-        if (!nameInput || !addressInput) {
-            alert('Por favor ingresa tu Nombre y Dirección de Entrega para procesar el delivery.');
-            return;
-        }
-
-        let message = `*⚓ NUEVO PEDIDO - TERMINAL PESQUERO ⚓*\n\n`;
-        message += `👤 *Cliente:* ${nameInput}\n`;
-        message += `📍 *Dirección:* ${addressInput}\n`;
-        message += `------------------------------------------\n`;
-        
-        let subtotalCalculated = 0;
-        cart.forEach(item => {
-            const itemCost = item.price * item.quantity;
-            subtotalCalculated += itemCost;
-            message += `▪️ ${item.quantity}x _${item.name}_ (S/ ${itemCost.toFixed(2)})\n`;
-        });
-
-        message += `------------------------------------------\n`;
-        message += `💰 *TOTAL A PAGAR: S/ ${subtotalCalculated.toFixed(2)}*\n\n`;
-        message += `¡Hola! Acabo de armar mi pedido desde la web de la carta completa. Quedo atento a la confirmación de la orden y tiempos de envío. 🌊`;
-
-        const whatsappNumber = '51902862400';
-        const targetUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
-        
-        window.open(targetUrl, '_blank');
+    // Validaciones básicas antes de procesar el pedido
+    if (!nameInput || !addressInput || !zoneSelect) {
+        alert("Por favor, ingresa tu nombre, dirección y selecciona la sede para el despacho.");
+        return;
     }
+
+    if (cart.length === 0) {
+        alert("Tu carrito está vacío. Agrega algunos platos antes de enviar.");
+        return;
+    }
+
+    // MAPEO DE LOS 9 LOCALES: Reemplaza estos números ficticios por los reales de cada tienda
+    const LOCALES_WHATSAPP = {
+        "surco": "51900000001",
+        "miraflores": "51900000002",
+        "san_miguel": "51900000003",
+        "los_olivos": "51900000004",
+        "chorrillos": "51900000005",
+        "san_borja": "51900000006",
+        "la_molina": "51900000007",
+        "magdalena": "51900000008",
+        "comas": "51900000009"
+    };
+
+    // Obtener automáticamente el número según el local seleccionado
+    const whatsappNumber = LOCALES_WHATSAPP[zoneSelect];
+
+    if (!whatsappNumber) {
+        alert("Hubo un error al identificar el número del local seleccionado.");
+        return;
+    }
+
+    // Construcción dinámica del mensaje de texto para WhatsApp
+    let message = `*NUEVO PEDIDO - DELIVERY WEB* 🌊\n\n`;
+    message += `👤 *Cliente:* ${nameInput}\n`;
+    message += `🏬 *Sede de Despacho:* ${zoneSelect.toUpperCase()}\n`;
+    message += `📍 *Dirección:* ${addressInput}\n`;
+    message += `------------------------------------------\n`;
+    
+    let subtotalCalculated = 0;
+    cart.forEach(item => {
+        const itemCost = item.price * item.quantity;
+        subtotalCalculated += itemCost;
+        message += `▪️ ${item.quantity}x _${item.name}_ (S/ ${itemCost.toFixed(2)})\n`;
+    });
+
+    message += `------------------------------------------\n`;
+    message += `💰 *TOTAL A PAGAR: S/ ${subtotalCalculated.toFixed(2)}*\n\n`;
+    message += `¡Hola! Acabo de armar mi pedido desde la web para la sede *${zoneSelect.toUpperCase()}*. Quedo atento a la confirmación de la orden y tiempos de envío. 🌊`;
+
+    // Redirección directa al número del local enrutado automáticamente
+    const targetUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+    
+    window.open(targetUrl, '_blank');
+}
 
     document.addEventListener('DOMContentLoaded', () => {
         const nav = document.getElementById('main-nav');
