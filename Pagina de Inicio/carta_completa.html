@@ -1081,9 +1081,9 @@
 </footer>
 
 <script>
-// ===== 1. CONFIG DE SEDES REALES - MISMO QUE EN INDEX =====
+// ===== 1. CONFIG DE SEDES REALES - PON LOS NÚMEROS REALES AQUÍ =====
 const WHATSAPP_LOCALES = {
-    "begonias": "51902862400",
+    "begonias": "51902862400", // <-- CAMBIA TODOS POR LOS REALES
     "jesus_maria": "51902862400",
     "barranco": "51902862400",
     "chacarilla": "51902862400",
@@ -1106,7 +1106,7 @@ const NOMBRES_SEDES = {
     "san_miguel": "Terminal Pesquero - SAN MIGUEL"
 };
 
-// ===== 2. TU CARRITO ORIGINAL =====
+// ===== 2. CARRITO =====
 let cart = [];
 
 function toggleCart() {
@@ -1125,13 +1125,20 @@ function toggleCart() {
 }
 
 function addToCart(buttonElement) {
-    const card = buttonElement.closest('.bg-surface') || buttonElement.closest('article');
-    if (!card) return;
+    const card = buttonElement.closest('.bg-surface') || buttonElement.closest('article') || buttonElement.closest('.card');
+    if (!card) {
+        console.error('No se encontró la card del producto');
+        return;
+    }
 
-    const nameEl = card.querySelector('.btn-item-name');
-    const priceEl = card.querySelector('.btn-item-price');
+    // Busca el nombre y precio. Ajusta los selectores si tus clases son diferentes
+    const nameEl = card.querySelector('.btn-item-name') || card.querySelector('[data-name]') || card.querySelector('h3');
+    const priceEl = card.querySelector('.btn-item-price') || card.querySelector('[data-price]');
 
-    if (!nameEl ||!priceEl) return;
+    if (!nameEl || !priceEl) {
+        console.error('No se encontró nombre o precio');
+        return;
+    }
 
     const name = nameEl.textContent.trim();
     const price = parseFloat(priceEl.textContent.replace('S/', '').replace(/,/g, '').trim());
@@ -1147,8 +1154,10 @@ function addToCart(buttonElement) {
     updateCartUI();
     
     const badge = document.getElementById('cart-count-badge');
-    badge.classList.add('scale-125');
-    setTimeout(() => badge.classList.remove('scale-125'), 200);
+    if(badge) {
+        badge.classList.add('scale-125');
+        setTimeout(() => badge.classList.remove('scale-125'), 200);
+    }
 }
 
 function changeQuantity(name, delta) {
@@ -1157,13 +1166,13 @@ function changeQuantity(name, delta) {
 
     item.quantity += delta;
     if (item.quantity <= 0) {
-        cart = cart.filter(i => i.name!== name);
+        cart = cart.filter(i => i.name !== name);
     }
     updateCartUI();
 }
 
 function removeProduct(name) {
-    cart = cart.filter(i => i.name!== name);
+    cart = cart.filter(i => i.name !== name);
     updateCartUI();
 }
 
@@ -1171,15 +1180,17 @@ function updateCartUI() {
     const container = document.getElementById('cart-items-container');
     const emptyMsg = document.getElementById('cart-empty-msg');
     
+    if(!container) return;
+    
     let totalItems = 0;
     let totalPrice = 0;
 
     container.querySelectorAll('.cart-render-item').forEach(el => el.remove());
 
     if (cart.length === 0) {
-        emptyMsg.classList.remove('hidden');
+        if(emptyMsg) emptyMsg.classList.remove('hidden');
     } else {
-        emptyMsg.classList.add('hidden');
+        if(emptyMsg) emptyMsg.classList.add('hidden');
         
         cart.forEach(item => {
             totalItems += item.quantity;
@@ -1207,25 +1218,29 @@ function updateCartUI() {
         });
     }
 
-    document.getElementById('cart-count-badge').textContent = totalItems;
-    document.getElementById('floating-cart-counter').textContent = totalItems;
-    document.getElementById('cart-total-price').textContent = `S/ ${totalPrice.toFixed(2)}`;
+    const badge1 = document.getElementById('cart-count-badge');
+    const badge2 = document.getElementById('floating-cart-counter');
+    const totalEl = document.getElementById('cart-total-price');
+    
+    if(badge1) badge1.textContent = totalItems;
+    if(badge2) badge2.textContent = totalItems;
+    if(totalEl) totalEl.textContent = `S/ ${totalPrice.toFixed(2)}`;
 }
 
-// ===== 3. WHATSAPP ACTUALIZADO CON SEDE BLOQUEADA =====
+// ===== 3. WHATSAPP CON SEDE BLOQUEADA =====
 function sendWhatsAppOrder() {
-    const SEDE_ELEGIDA = localStorage.getItem('tp_sede_index');
+    const SEDE_ELEGIDA = localStorage.getItem('tp_sede_index') || localStorage.getItem('sede_seleccionada');
     
     if(!SEDE_ELEGIDA) {
         alert('Error: Primero elige tu sede desde la página principal');
-        window.location.href = '/index.html';
+        window.location.href = '../index.html';
         return;
     }
 
-    const nameInput = document.getElementById('customer-name').value.trim();
-    const addressInput = document.getElementById('customer-address').value.trim();
+    const nameInput = document.getElementById('customer-name');
+    const addressInput = document.getElementById('customer-address');
 
-    if (!nameInput ||!addressInput) {
+    if (!nameInput || !addressInput || !nameInput.value.trim() || !addressInput.value.trim()) {
         alert("Por favor, ingresa tu nombre y dirección.");
         return;
     }
@@ -1244,9 +1259,9 @@ function sendWhatsAppOrder() {
     }
 
     let message = `*NUEVO PEDIDO - DELIVERY WEB* 🌊\n\n`;
-    message += `👤 *Cliente:* ${nameInput}\n`;
+    message += `👤 *Cliente:* ${nameInput.value.trim()}\n`;
     message += `🏬 *Sede de Despacho:* ${nombreSede}\n`;
-    message += `📍 *Dirección:* ${addressInput}\n`;
+    message += `📍 *Dirección:* ${addressInput.value.trim()}\n`;
     message += `------------------------------------------\n`;
     
     let subtotalCalculated = 0;
@@ -1264,13 +1279,13 @@ function sendWhatsAppOrder() {
     window.open(targetUrl, '_blank');
 }
 
-// ===== 4. INIT: BLOQUEA EL SELECT AL CARGAR =====
+// ===== 4. INIT =====
 document.addEventListener('DOMContentLoaded', () => {
-    const SEDE_ELEGIDA = localStorage.getItem('tp_sede_index');
+    const SEDE_ELEGIDA = localStorage.getItem('tp_sede_index') || localStorage.getItem('sede_seleccionada');
     
     if(!SEDE_ELEGIDA) {
         alert('Primero elige tu sede en la página principal');
-        window.location.href = '/index.html';
+        window.location.href = '../index.html';
         return;
     }
     
@@ -1285,32 +1300,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.insertAdjacentHTML('afterbegin', `
       <div class="bg-ocean-deep text-white text-center py-2 font-label-sm sticky top-0 z-50">
         Tu pedido se enviará desde: ${NOMBRES_SEDES[SEDE_ELEGIDA]} | 
-        <button onclick="localStorage.removeItem('tp_sede_index'); window.location.href='/index.html'" class="underline">Cambiar sede</button>
+        <button onclick="localStorage.clear(); window.location.href='../index.html'" class="underline">Cambiar sede</button>
       </div>
     `);
 
-    const nav = document.getElementById('main-nav');
-    if(nav) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                nav.classList.add('shadow-md');
-            } else {
-                nav.classList.remove('shadow-md');
-            }
-        });
-    }
-
-    // Carousel
-    const images = document.querySelectorAll('#hero-carousel.carousel-img');
-    if(images.length > 0) {
-        let currentIndex = 0;
-        function changeSlide() {
-            images[currentIndex].classList.replace('opacity-100', 'opacity-0');
-            currentIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].classList.replace('opacity-0', 'opacity-100');
+    // Auto-conectar todos los botones "Añadir"
+    document.querySelectorAll('button').forEach(btn => {
+        if(btn.textContent.includes('Añadir') || btn.textContent.includes('Agregar')) {
+            btn.setAttribute('onclick', 'addToCart(this)');
         }
-        setInterval(changeSlide, 2000);
-    }
+    });
 });
 </script>
 </body></html>
