@@ -528,18 +528,119 @@
 </footer>
 <!-- Simple script for mobile menu toggle -->
 <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const nav = document.getElementById('main-nav');
-            
-            // Subtle shadow on scroll
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 10) {
-                    nav.classList.add('shadow-md');
-                } else {
-                    nav.classList.remove('shadow-md');
-                }
-            });
-        });
-    </script>
+// 1. MAPA DE LOS 9 WHATSAPP REALES - CAMBIA ESTOS NÚMEROS
+const WHATSAPP_LOCALES = {
+    "begonias": "51902862400",
+    "jesus_maria": "51902862400",
+    "barranco": "51902862400",
+    "chacarilla": "51902862400",
+    "miraflores": "51902862400",
+    "monterrico": "51902862400",
+    "san_isidro": "51902862400",
+    "punta_hermosa": "51902862400",
+    "san_miguel": "51902862400"
+};
+
+// 2. MODAL PARA ELEGIR SEDE - ACTUALIZADO CON SEDES REALES
+document.body.insertAdjacentHTML('beforeend', `
+<div id="modal-sede" class="fixed inset-0 bg-black/70 z-[9999] hidden items-center justify-center p-4">
+  <div class="bg-surface rounded-xl p-6 max-w-md w-full">
+    <h3 class="font-headline-md text-ocean-deep mb-4">Elige tu sede más cercana</h3>
+    <p class="font-body-md text-on-surface-variant mb-4">Para que tu pedido llegue directo a cocina, sin derivadores.</p>
+    <select id="selector-sede" class="w-full px-3 py-3 border-2 border-ocean-deep rounded text-body-md mb-4">
+      <option value="">-- Selecciona tu Terminal Pesquero --</option>
+      <option value="begonias">BEGONIAS - Cl. Francisco Masías 555</option>
+      <option value="jesus_maria">JESÚS MARÍA - Av. Gregorio Escobedo 764</option>
+      <option value="barranco">BARRANCO - Av. Grau 1216</option>
+      <option value="chacarilla">CHACARILLA - Calle Monte Grande 111</option>
+      <option value="miraflores">MIRAFLORES - Av. Larco 636</option>
+      <option value="monterrico">MONTERRICO - Av. El Polo 610</option>
+      <option value="san_isidro">SAN ISIDRO - Av. Canaval y Moreyra 167</option>
+      <option value="punta_hermosa">PUNTA HERMOSA - Av. Sunset 807</option>
+      <option value="san_miguel">SAN MIGUEL - Av. Riva Agüero 740</option>
+    </select>
+    <button onclick="confirmarSede()" class="w-full bg-ocean-deep text-white py-3 rounded font-label-lg uppercase">Confirmar Sede</button>
+  </div>
+</div>
+`);
+
+let SEDE_ACTIVA = localStorage.getItem('tp_sede_index') || '';
+
+// 3. INTERCEPTA TODOS LOS LINKS DE WHATSAPP
+function interceptarWhatsApp() {
+  const linksWhatsApp = document.querySelectorAll('a[href*="api.whatsapp.com"], a[href*="wa.me"]');
+  
+  linksWhatsApp.forEach(link => {
+    link.addEventListener('click', function(e) {
+      if(!SEDE_ACTIVA) {
+        e.preventDefault();
+        document.getElementById('modal-sede').classList.remove('hidden');
+        document.getElementById('modal-sede').classList.add('flex');
+        window.linkPendiente = this.href;
+      } else {
+        e.preventDefault();
+        const numero = WHATSAPP_LOCALES[SEDE_ACTIVA];
+        const nombreSede = document.querySelector(`#selector-sede option[value="${SEDE_ACTIVA}"]`).textContent;
+        const mensaje = `Hola, quiero hacer un pedido desde la web. Sede: Terminal Pesquero ${nombreSede}`;
+        window.open(`https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`, '_blank');
+      }
+    });
+  });
+}
+
+// 4. INTERCEPTA LINK A LA CARTA
+function interceptarCarta() {
+  const linksCarta = document.querySelectorAll('a[href*="carta_completa.html"]');
+  
+  linksCarta.forEach(link => {
+    link.addEventListener('click', function(e) {
+      if(!SEDE_ACTIVA) {
+        e.preventDefault();
+        document.getElementById('modal-sede').classList.remove('hidden');
+        document.getElementById('modal-sede').classList.add('flex');
+        window.redirigirACarta = true;
+      }
+    });
+  });
+}
+
+// 5. CONFIRMA SEDE Y REDIRIGE
+function confirmarSede() {
+  const sede = document.getElementById('selector-sede').value;
+  if(!sede) {
+    alert('Selecciona una sede por favor');
+    return;
+  }
+  SEDE_ACTIVA = sede;
+  localStorage.setItem('tp_sede_index', sede);
+  document.getElementById('modal-sede').classList.add('hidden');
+  
+  if(window.redirigirACarta) {
+    window.redirigirACarta = false;
+    window.location.href = 'Pagina de Inicio/carta_completa.html';
+    return;
+  }
+  
+  const numero = WHATSAPP_LOCALES[SEDE_ACTIVA];
+  const nombreSede = document.querySelector(`#selector-sede option[value="${sede}"]`).textContent;
+  const mensaje = `Hola, quiero hacer un pedido desde la web. Sede: Terminal Pesquero ${nombreSede}`;
+  window.open(`https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`, '_blank');
+}
+
+// 6. INICIA TODO AL CARGAR
+document.addEventListener('DOMContentLoaded', function() {
+  interceptarWhatsApp();
+  interceptarCarta();
+  
+  if(SEDE_ACTIVA) {
+    const nombreSede = document.querySelector(`#selector-sede option[value="${SEDE_ACTIVA}"]`).textContent;
+    document.body.insertAdjacentHTML('afterbegin', `
+      <div class="bg-sunset-coral text-white text-center py-2 font-label-sm">
+        Estás pidiendo a: Terminal Pesquero ${nombreSede} | <button onclick="localStorage.removeItem('tp_sede_index'); location.reload()" class="underline">Cambiar</button>
+      </div>
+    `);
+  }
+});
+</script>
 
 </body></html>
