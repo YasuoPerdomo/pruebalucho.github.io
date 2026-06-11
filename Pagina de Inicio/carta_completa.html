@@ -1081,119 +1081,152 @@
 </footer>
 
 <script>
-    let cart = [];
+// ===== 1. CONFIG DE SEDES REALES - MISMO QUE EN INDEX =====
+const WHATSAPP_LOCALES = {
+    "begonias": "51902862400",
+    "jesus_maria": "51902862400",
+    "barranco": "51902862400",
+    "chacarilla": "51902862400",
+    "miraflores": "51902862400",
+    "monterrico": "51902862400",
+    "san_isidro": "51902862400",
+    "punta_hermosa": "51902862400",
+    "san_miguel": "51902862400"
+};
 
-    function toggleCart() {
-        const sidebar = document.getElementById('sidebar-cart');
-        const overlay = document.getElementById('cart-overlay');
+const NOMBRES_SEDES = {
+    "begonias": "Terminal Pesquero - BEGONIAS",
+    "jesus_maria": "Terminal Pesquero - JESÚS MARÍA",
+    "barranco": "Terminal Pesquero - BARRANCO",
+    "chacarilla": "Terminal Pesquero - CHACARILLA",
+    "miraflores": "Terminal Pesquero - MIRAFLORES",
+    "monterrico": "Terminal Pesquero - MONTERRICO",
+    "san_isidro": "Terminal Pesquero - SAN ISIDRO",
+    "punta_hermosa": "Terminal Pesquero - PUNTA HERMOSA",
+    "san_miguel": "Terminal Pesquero - SAN MIGUEL"
+};
+
+// ===== 2. TU CARRITO ORIGINAL =====
+let cart = [];
+
+function toggleCart() {
+    const sidebar = document.getElementById('sidebar-cart');
+    const overlay = document.getElementById('cart-overlay');
+    
+    if (sidebar.classList.contains('translate-x-full')) {
+        sidebar.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        setTimeout(() => overlay.classList.add('opacity-100'), 10);
+    } else {
+        sidebar.classList.add('translate-x-full');
+        overlay.classList.remove('opacity-100');
+        setTimeout(() => overlay.classList.add('hidden'), 300);
+    }
+}
+
+function addToCart(buttonElement) {
+    const card = buttonElement.closest('.bg-surface') || buttonElement.closest('article');
+    if (!card) return;
+
+    const nameEl = card.querySelector('.btn-item-name');
+    const priceEl = card.querySelector('.btn-item-price');
+
+    if (!nameEl ||!priceEl) return;
+
+    const name = nameEl.textContent.trim();
+    const price = parseFloat(priceEl.textContent.replace('S/', '').replace(/,/g, '').trim());
+
+    const existingItem = cart.find(item => item.name === name);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ name, price, quantity: 1 });
+    }
+
+    updateCartUI();
+    
+    const badge = document.getElementById('cart-count-badge');
+    badge.classList.add('scale-125');
+    setTimeout(() => badge.classList.remove('scale-125'), 200);
+}
+
+function changeQuantity(name, delta) {
+    const item = cart.find(i => i.name === name);
+    if (!item) return;
+
+    item.quantity += delta;
+    if (item.quantity <= 0) {
+        cart = cart.filter(i => i.name!== name);
+    }
+    updateCartUI();
+}
+
+function removeProduct(name) {
+    cart = cart.filter(i => i.name!== name);
+    updateCartUI();
+}
+
+function updateCartUI() {
+    const container = document.getElementById('cart-items-container');
+    const emptyMsg = document.getElementById('cart-empty-msg');
+    
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    container.querySelectorAll('.cart-render-item').forEach(el => el.remove());
+
+    if (cart.length === 0) {
+        emptyMsg.classList.remove('hidden');
+    } else {
+        emptyMsg.classList.add('hidden');
         
-        if (sidebar.classList.contains('translate-x-full')) {
-            sidebar.classList.remove('translate-x-full');
-            overlay.classList.remove('hidden');
-            setTimeout(() => overlay.classList.add('opacity-100'), 10);
-        } else {
-            sidebar.classList.add('translate-x-full');
-            overlay.classList.remove('opacity-100');
-            setTimeout(() => overlay.classList.add('hidden'), 300);
-        }
-    }
+        cart.forEach(item => {
+            totalItems += item.quantity;
+            totalPrice += (item.price * item.quantity);
 
-    function addToCart(buttonElement) {
-        const card = buttonElement.closest('.bg-surface') || buttonElement.closest('article');
-        if (!card) return;
-
-        const nameEl = card.querySelector('.btn-item-name');
-        const priceEl = card.querySelector('.btn-item-price');
-
-        if (!nameEl || !priceEl) return;
-
-        const name = nameEl.textContent.trim();
-        const price = parseFloat(priceEl.textContent.replace('S/', '').replace(/,/g, '').trim());
-
-        const existingItem = cart.find(item => item.name === name);
-
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({ name, price, quantity: 1 });
-        }
-
-        updateCartUI();
-        
-        const badge = document.getElementById('cart-count-badge');
-        badge.classList.add('scale-125');
-        setTimeout(() => badge.classList.remove('scale-125'), 200);
-    }
-
-    function changeQuantity(name, delta) {
-        const item = cart.find(i => i.name === name);
-        if (!item) return;
-
-        item.quantity += delta;
-        if (item.quantity <= 0) {
-            cart = cart.filter(i => i.name !== name);
-        }
-        updateCartUI();
-    }
-
-    function removeProduct(name) {
-        cart = cart.filter(i => i.name !== name);
-        updateCartUI();
-    }
-
-    function updateCartUI() {
-        const container = document.getElementById('cart-items-container');
-        const emptyMsg = document.getElementById('cart-empty-msg');
-        
-        let totalItems = 0;
-        let totalPrice = 0;
-
-        container.querySelectorAll('.cart-render-item').forEach(el => el.remove());
-
-        if (cart.length === 0) {
-            emptyMsg.classList.remove('hidden');
-        } else {
-            emptyMsg.classList.add('hidden');
-            
-            cart.forEach(item => {
-                totalItems += item.quantity;
-                totalPrice += (item.price * item.quantity);
-
-                const itemRow = document.createElement('div');
-                itemRow.className = 'cart-render-item flex justify-between items-center bg-sand-mist p-3 rounded border border-ocean-deep/5 shadow-sm transition-all';
-                itemRow.innerHTML = `
-                    <div class="flex-grow pr-2">
-                        <h4 class="font-title-lg text-body-md text-ocean-deep font-semibold leading-tight">${item.name}</h4>
-                        <span class="text-label-sm text-sunset-coral font-bold block mt-0.5">S/ ${(item.price * item.quantity).toFixed(2)}</span>
+            const itemRow = document.createElement('div');
+            itemRow.className = 'cart-render-item flex justify-between items-center bg-sand-mist p-3 rounded border border-ocean-deep/5 shadow-sm transition-all';
+            itemRow.innerHTML = `
+                <div class="flex-grow pr-2">
+                    <h4 class="font-title-lg text-body-md text-ocean-deep font-semibold leading-tight">${item.name}</h4>
+                    <span class="text-label-sm text-sunset-coral font-bold block mt-0.5">S/ ${(item.price * item.quantity).toFixed(2)}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center bg-surface border border-outline-variant rounded">
+                        <button onclick="changeQuantity('${item.name}', -1)" class="px-2 py-1 text-ocean-deep hover:bg-surface-variant font-bold text-sm transition-colors">-</button>
+                        <span class="px-2 text-body-md font-semibold text-on-surface">${item.quantity}</span>
+                        <button onclick="changeQuantity('${item.name}', 1)" class="px-2 py-1 text-ocean-deep hover:bg-surface-variant font-bold text-sm transition-colors">+</button>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <div class="flex items-center bg-surface border border-outline-variant rounded">
-                            <button onclick="changeQuantity('${item.name}', -1)" class="px-2 py-1 text-ocean-deep hover:bg-surface-variant font-bold text-sm transition-colors">-</button>
-                            <span class="px-2 text-body-md font-semibold text-on-surface">${item.quantity}</span>
-                            <button onclick="changeQuantity('${item.name}', 1)" class="px-2 py-1 text-ocean-deep hover:bg-surface-variant font-bold text-sm transition-colors">+</button>
-                        </div>
-                        <button onclick="removeProduct('${item.name}')" class="text-error p-1 hover:bg-error/10 rounded flex items-center justify-center transition-colors" title="Eliminar">
-                            <span class="material-symbols-outlined text-lg">delete</span>
-                        </button>
-                    </div>
-                `;
-                container.appendChild(itemRow);
-            });
-        }
-
-        document.getElementById('cart-count-badge').textContent = totalItems;
-        document.getElementById('floating-cart-counter').textContent = totalItems;
-        document.getElementById('cart-total-price').textContent = `S/ ${totalPrice.toFixed(2)}`;
+                    <button onclick="removeProduct('${item.name}')" class="text-error p-1 hover:bg-error/10 rounded flex items-center justify-center transition-colors" title="Eliminar">
+                        <span class="material-symbols-outlined text-lg">delete</span>
+                    </button>
+                </div>
+            `;
+            container.appendChild(itemRow);
+        });
     }
 
+    document.getElementById('cart-count-badge').textContent = totalItems;
+    document.getElementById('floating-cart-counter').textContent = totalItems;
+    document.getElementById('cart-total-price').textContent = `S/ ${totalPrice.toFixed(2)}`;
+}
+
+// ===== 3. WHATSAPP ACTUALIZADO CON SEDE BLOQUEADA =====
 function sendWhatsAppOrder() {
-    const nameInput = document.getElementById('customer-name').value.trim();
-    const addressInput = document.getElementById('customer-address').value.trim(); // Ajustado al id del HTML
-    const zoneSelect = document.getElementById('delivery-zone').value; // Captura la sede elegida
+    const SEDE_ELEGIDA = localStorage.getItem('tp_sede_index');
+    
+    if(!SEDE_ELEGIDA) {
+        alert('Error: Primero elige tu sede desde la página principal');
+        window.location.href = '/index.html';
+        return;
+    }
 
-    // Validaciones básicas antes de procesar el pedido
-    if (!nameInput || !addressInput || !zoneSelect) {
-        alert("Por favor, ingresa tu nombre, dirección y selecciona la sede para el despacho.");
+    const nameInput = document.getElementById('customer-name').value.trim();
+    const addressInput = document.getElementById('customer-address').value.trim();
+
+    if (!nameInput ||!addressInput) {
+        alert("Por favor, ingresa tu nombre y dirección.");
         return;
     }
 
@@ -1202,31 +1235,17 @@ function sendWhatsAppOrder() {
         return;
     }
 
-    // MAPEO DE LOS 9 LOCALES: Reemplaza estos números ficticios por los reales de cada tienda
-    const LOCALES_WHATSAPP = {
-        "surco": "51900000001",
-        "miraflores": "51900000002",
-        "san_miguel": "51900000003",
-        "los_olivos": "51900000004",
-        "chorrillos": "51900000005",
-        "san_borja": "51900000006",
-        "la_molina": "51900000007",
-        "magdalena": "51900000008",
-        "comas": "51900000009"
-    };
-
-    // Obtener automáticamente el número según el local seleccionado
-    const whatsappNumber = LOCALES_WHATSAPP[zoneSelect];
+    const whatsappNumber = WHATSAPP_LOCALES[SEDE_ELEGIDA];
+    const nombreSede = NOMBRES_SEDES[SEDE_ELEGIDA];
 
     if (!whatsappNumber) {
-        alert("Hubo un error al identificar el número del local seleccionado.");
+        alert("Hubo un error al identificar el número del local.");
         return;
     }
 
-    // Construcción dinámica del mensaje de texto para WhatsApp
     let message = `*NUEVO PEDIDO - DELIVERY WEB* 🌊\n\n`;
     message += `👤 *Cliente:* ${nameInput}\n`;
-    message += `🏬 *Sede de Despacho:* ${zoneSelect.toUpperCase()}\n`;
+    message += `🏬 *Sede de Despacho:* ${nombreSede}\n`;
     message += `📍 *Dirección:* ${addressInput}\n`;
     message += `------------------------------------------\n`;
     
@@ -1239,16 +1258,39 @@ function sendWhatsAppOrder() {
 
     message += `------------------------------------------\n`;
     message += `💰 *TOTAL A PAGAR: S/ ${subtotalCalculated.toFixed(2)}*\n\n`;
-    message += `¡Hola! Acabo de armar mi pedido desde la web para la sede *${zoneSelect.toUpperCase()}*. Quedo atento a la confirmación de la orden y tiempos de envío. 🌊`;
+    message += `¡Hola! Acabo de armar mi pedido desde la web para la sede *${nombreSede}*. Quedo atento a la confirmación.`;
 
-    // Redirección directa al número del local enrutado automáticamente
     const targetUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
-    
     window.open(targetUrl, '_blank');
 }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const nav = document.getElementById('main-nav');
+// ===== 4. INIT: BLOQUEA EL SELECT AL CARGAR =====
+document.addEventListener('DOMContentLoaded', () => {
+    const SEDE_ELEGIDA = localStorage.getItem('tp_sede_index');
+    
+    if(!SEDE_ELEGIDA) {
+        alert('Primero elige tu sede en la página principal');
+        window.location.href = '/index.html';
+        return;
+    }
+    
+    const zoneSelect = document.getElementById('delivery-zone');
+    if(zoneSelect) {
+        zoneSelect.innerHTML = `<option value="${SEDE_ELEGIDA}" selected>${NOMBRES_SEDES[SEDE_ELEGIDA]}</option>`;
+        zoneSelect.disabled = true;
+        zoneSelect.style.backgroundColor = '#e5e2de';
+        zoneSelect.style.cursor = 'not-allowed';
+    }
+    
+    document.body.insertAdjacentHTML('afterbegin', `
+      <div class="bg-ocean-deep text-white text-center py-2 font-label-sm sticky top-0 z-50">
+        Tu pedido se enviará desde: ${NOMBRES_SEDES[SEDE_ELEGIDA]} | 
+        <button onclick="localStorage.removeItem('tp_sede_index'); window.location.href='/index.html'" class="underline">Cambiar sede</button>
+      </div>
+    `);
+
+    const nav = document.getElementById('main-nav');
+    if(nav) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 10) {
                 nav.classList.add('shadow-md');
@@ -1256,27 +1298,19 @@ function sendWhatsAppOrder() {
                 nav.classList.remove('shadow-md');
             }
         });
-    });
-    
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const images = document.querySelectorAll('#hero-carousel .carousel-img');
-        let currentIndex = 0;
+    }
 
+    // Carousel
+    const images = document.querySelectorAll('#hero-carousel.carousel-img');
+    if(images.length > 0) {
+        let currentIndex = 0;
         function changeSlide() {
-            // Oculta la imagen actual cambiando su opacidad a 0
             images[currentIndex].classList.replace('opacity-100', 'opacity-0');
-            
-            // Calcula el índice de la siguiente imagen
             currentIndex = (currentIndex + 1) % images.length;
-            
-            // Muestra la nueva imagen cambiando su opacidad a 100
             images[currentIndex].classList.replace('opacity-0', 'opacity-100');
         }
-
-        // Configura el carrusel para cambiar automáticamente cada 4 segundos (4000ms)
         setInterval(changeSlide, 2000);
-    });
+    }
+});
 </script>
 </body></html>
